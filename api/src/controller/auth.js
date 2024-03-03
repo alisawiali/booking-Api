@@ -40,7 +40,10 @@ export const login = async (req, res, next) => {
     );
     if (!isPasswordCorrect)
       return next(createErrro(400, "Password incorrect or username!"));
-    res.status(200).json(user);
+
+    //  name ausgedacht  ==> otherDetails
+    const { password, isAdmin, ...otherDetails } = user._doc;
+    res.status(200).json(otherDetails);
   } catch (error) {
     next(error);
   }
