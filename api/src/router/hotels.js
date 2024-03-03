@@ -35,22 +35,20 @@ hotelsRouter.delete("/:id", async (req, res) => {
     res.status(400).send("Error deleting the hotel.", error);
   }
 });
-// GET
-hotelsRouter.get("/:id", async (req, res) => {
-  try {
-    const findIdHotel = await Hotels.findById(req.params.id);
-    res.status(200).send(findIdHotel);
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-});
-// GET ALL
+// GET by id
 hotelsRouter.get("/", async (req, res, next) => {
+  const faild = true;
+  const err = new Error();
+  err.status = 404;
+  err.message = "Sorry  the id not Found";
+  if (faild) return next(err);
+
   try {
-    const findHotels = await Hotels.find();
+    const findHotels = await Hotels.find("öö");
     res.status(200).send(findHotels);
   } catch (error) {
     next(error);
   }
 });
+
 export default hotelsRouter;
