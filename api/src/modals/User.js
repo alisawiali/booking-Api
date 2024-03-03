@@ -13,7 +13,7 @@ const userSschema = new Schema(
       unique: true,
     },
     password: {
-      type: String,
+      type: Number,
       required: true,
     },
     isAdmin: {
