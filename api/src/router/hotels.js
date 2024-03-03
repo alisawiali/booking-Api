@@ -14,7 +14,43 @@ hotelsRouter.post("/", async (req, res) => {
   }
 });
 // UPDATE
+hotelsRouter.put("/:id", async (req, res) => {
+  try {
+    const updateHotel = await Hotels.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).send(updateHotel);
+  } catch (error) {
+    res.status(500).send("Server Error", error);
+  }
+});
 // DELETE
+hotelsRouter.delete("/:id", async (req, res) => {
+  try {
+    await Hotels.findByIdAndDelete(req.params.id);
+    res.status(200).send("Successfully deleted the hotel.");
+  } catch (error) {
+    res.status(400).send("Error deleting the hotel.", error);
+  }
+});
 // GET
+hotelsRouter.get("/:id", async (req, res) => {
+  try {
+    const findIdHotel = await Hotels.findById(req.params.id);
+    res.status(200).send(findIdHotel);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 // GET ALL
+hotelsRouter.get("/", async (req, res, next) => {
+  try {
+    const findHotels = await Hotels.find();
+    res.status(200).send(findHotels);
+  } catch (error) {
+    next(error);
+  }
+});
 export default hotelsRouter;

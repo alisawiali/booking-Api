@@ -56,4 +56,4 @@ const Hotelsschema = new Schema({
 });
 
 // Hier verwenden wir mongoose.model(), um das Model zu erstellen und zu exportieren
-export default mongoose.model("hotels", Hotelsschema);
+export default mongoose.model("Hotels", Hotelsschema);
