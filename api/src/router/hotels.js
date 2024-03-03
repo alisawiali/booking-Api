@@ -1,5 +1,6 @@
 import { Router } from "express";
 import Hotels from "../modals/Hotels.js";
+import { createErrro } from "../utils/error.js";
 
 const hotelsRouter = Router();
 // CAEATE
@@ -37,14 +38,8 @@ hotelsRouter.delete("/:id", async (req, res) => {
 });
 // GET by id
 hotelsRouter.get("/", async (req, res, next) => {
-  const faild = true;
-  const err = new Error();
-  err.status = 404;
-  err.message = "Sorry  the id not Found";
-  if (faild) return next(err);
-
   try {
-    const findHotels = await Hotels.find("öö");
+    const findHotels = await Hotels.find();
     res.status(200).send(findHotels);
   } catch (error) {
     next(error);
