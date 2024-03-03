@@ -8,7 +8,7 @@ export const createHotel = async (req, res, next) => {
     // if (!savedHotel) return res.status(400).send("Failed to create Hotel");
   } catch (error) {
     next(error);
-  }
+  } 
 };
 
 // UPDATE
