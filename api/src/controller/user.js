@@ -1,7 +1,7 @@
 import User from "../modals/User.js";
 
 // UPDATE
-export const putUser = async (req, res, next) => {
+export const creatUser = async (req, res, next) => {
   try {
     const updateUser = await User.findByIdAndUpdate(
       req.params.id,
@@ -25,7 +25,7 @@ export const deletedUser = async (req, res) => {
 //  GET BY ID
 export const getByIddUser = async (req, res, next) => {
   try {
-    const user = await User.findById();
+    const user = await User.findById(req.params.id);
     res.status(200).send(user);
   } catch (error) {
     next(error);
@@ -33,10 +33,10 @@ export const getByIddUser = async (req, res, next) => {
 };
 
 // GET All
-export const getdUser = async (req, res, next) => {
+export const getdUsers = async (req, res, next) => {
   try {
-    const findHotels = await Hotels.find();
-    res.status(200).send(findHotels);
+    const user = await User.find();
+    res.status(200).send(user);
   } catch (error) {
     next(error);
   }

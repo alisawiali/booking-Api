@@ -17,6 +17,10 @@ hotelsRouter.put("/:id", puteHotel);
 hotelsRouter.delete("/:id", deletedHotel);
 //  GET BY ID HOTEL
 hotelsRouter.get("/:id", getByIddHotel);
-export default hotelsRouter;
+
 // GET All HOTLES
 hotelsRouter.get("/", getdHotels);
+
+
+
+export default hotelsRouter;

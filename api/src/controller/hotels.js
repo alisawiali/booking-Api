@@ -36,7 +36,7 @@ export const deletedHotel = async (req, res) => {
 //  GET BY ID
 export const getByIddHotel = async (req, res, next) => {
   try {
-    const findHotels = await Hotels.findById();
+    const findHotels = await Hotels.findById(req.params.id);
     res.status(200).send(findHotels);
   } catch (error) {
     next(error);
