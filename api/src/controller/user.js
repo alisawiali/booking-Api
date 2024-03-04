@@ -1,14 +1,14 @@
 import User from "../modals/User.js";
 
 // UPDATE
-export const creatUser = async (req, res, next) => {
+export const updateUser = async (req, res, next) => {
   try {
-    const updateUser = await User.findByIdAndUpdate(
+    const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
       { new: true }
     );
-    res.status(200).send(updateUser);
+    res.status(200).send(updatedUser);
   } catch (error) {
     next(error);
   }
@@ -23,7 +23,7 @@ export const deletedUser = async (req, res) => {
   }
 };
 //  GET BY ID
-export const getByIddUser = async (req, res, next) => {
+export const getByIdUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);
     res.status(200).send(user);
@@ -33,7 +33,7 @@ export const getByIddUser = async (req, res, next) => {
 };
 
 // GET All
-export const getdUsers = async (req, res, next) => {
+export const getUsers = async (req, res, next) => {
   try {
     const user = await User.find();
     res.status(200).send(user);
