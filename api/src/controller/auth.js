@@ -30,18 +30,19 @@ export const login = async (req, res, next) => {
     const user = await User.findOne({ username: req.body.username });
     if (!user) return next(createErrro(404, "user not found!"));
 
+    // Das erste
     const isPasswordCorrect = await bcrypt.compare(
       req.body.password,
       user.password
     );
     if (!isPasswordCorrect)
       return next(createErrro(400, "Password incorrect or username!"));
-    //  Token Prüfw stelle
+    //  Token Prüfw stelle der password ist korrekt (2)
     const token = jwt.sign(
       { id: user._id, idAdmin: user.isAdmin },
       process.env.JWT
     );
-    //  name ausgedacht  ==> otherDetails
+    //  name ausgedacht  ==> otherDetails (3)
     const { password, isAdmin, ...otherDetails } = user._doc;
     res
       .cookie("accesse_token", token, {
