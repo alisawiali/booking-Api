@@ -1,12 +1,8 @@
 import User from "../modals/User.js";
-/* Node.js Bibliothek 
- bcryptjs bietet automatisch Salting an,
- was bedeutet, dass jedem Passwort vor dem Hashing eine
-  zufällige Zeichenfolge (Salz) hinzugefügt wird. Dadurch
-   wird verhindert, dass identische Passwörter denselben
-    Hash-Wert erzeugen, was die Sicherheit erhöht
-*/
+//  import bcrypt aus dem bcrptjs Bibliothek von Node.js
 import bcrypt from "bcryptjs";
+//  import JWT from "jsonwebtoken"
+import  jwt  from "jsonwebtoken";
 
 //  Fehlerbehandlung ======>
 import { createErrro } from "../utils/error.js";
@@ -40,10 +36,19 @@ export const login = async (req, res, next) => {
     );
     if (!isPasswordCorrect)
       return next(createErrro(400, "Password incorrect or username!"));
-
+    //  Token Prüfw stelle
+    const token = jwt.sign(
+      { id: user._id, idAdmin: user.isAdmin },
+      process.env.JWT
+    );
     //  name ausgedacht  ==> otherDetails
     const { password, isAdmin, ...otherDetails } = user._doc;
-    res.status(200).json(otherDetails);
+    res
+      .cookie("accesse_token", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json(otherDetails);
   } catch (error) {
     next(error);
   }

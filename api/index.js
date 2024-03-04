@@ -10,9 +10,15 @@ import hotelsRouter from "./src/router/hotels.js";
 import userRouter from "./src/router/user.js";
 import roomsRouter from "./src/router/rooms.js";
 
+//  import  cookie-parser
+import cookieParser from "cookie-parser";
+
+
 // Initialisiere die Express-App
 const app = express();
 
+//  
+app.use(cookieParser());
 // Middleware für das Parsen von JSON-Anfragen
 app.use(express.json());
 
