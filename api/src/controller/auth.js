@@ -39,11 +39,12 @@ export const login = async (req, res, next) => {
       return next(createErrro(400, "Password incorrect or username!"));
     //  Token Prüfw stelle der password ist korrekt (2)
     const token = jwt.sign(
-      { id: user._id, idAdmin: user.isAdmin },
+      { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT
     );
     //  name ausgedacht  ==> otherDetails (3)
     const { password, isAdmin, ...otherDetails } = user._doc;
+    // Token abschickt
     res
       .cookie("accesse_token", token, {
         httpOnly: true,

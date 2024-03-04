@@ -5,6 +5,7 @@ import {
   getByIdUser,
   getUsers,
 } from "../controller/user.js";
+
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 
 const userRouter = Router();
