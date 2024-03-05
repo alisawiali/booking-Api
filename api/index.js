@@ -8,16 +8,15 @@ import { connectDb } from "./service/db.js";
 import authRouter from "./src/router/auth.js";
 import hotelsRouter from "./src/router/hotels.js";
 import userRouter from "./src/router/user.js";
-import roomsRouter from "./src/router/rooms.js";
+import roomRouter from "./src/router/rooms.js";
 
 //  import  cookie-parser
 import cookieParser from "cookie-parser";
 
-
 // Initialisiere die Express-App
 const app = express();
 
-//  
+//
 app.use(cookieParser());
 // Middleware für das Parsen von JSON-Anfragen
 app.use(express.json());
@@ -34,7 +33,7 @@ const PORT = process.env.PORT || 3000;
 // Verwende die verschiedenen Router für verschiedene Endpunkte
 app.use("/api/auth", authRouter);
 app.use("/api/hotels", hotelsRouter);
-app.use("/api/rooms", roomsRouter);
+app.use("/api/rooms", roomRouter);
 app.use("/api/user", userRouter);
 
 

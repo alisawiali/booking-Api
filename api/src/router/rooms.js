@@ -1,9 +1,19 @@
 import { Router } from "express";
+import { verifyAdmin } from "../utils/verifyToken.js";
+import {
+  createRoom,
+  deleteRoom,
+  getRoom,
+  getRooms,
+  updateRoom,
+} from "../controller/rooms.js";
 
-const roomsRouter = Router();
+const roomRouter = Router();
 
-roomsRouter.get("/", (req, res) => {
-  res.send("room-list");
-});
+roomRouter.post("/", verifyAdmin, createRoom);
+roomRouter.put("/:id", verifyAdmin, updateRoom);
+roomRouter.delete("/:id", verifyAdmin, deleteRoom);
+roomRouter.get("/:id", getRoom);
+roomRouter.get("/", getRooms);
 
-export default roomsRouter;
+export default roomRouter;
