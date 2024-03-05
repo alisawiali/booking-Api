@@ -10,9 +10,9 @@ import {
 
 const roomRouter = Router();
 
-roomRouter.post("/", verifyAdmin, createRoom);
+roomRouter.post("/:hotelId", verifyAdmin, createRoom);
 roomRouter.put("/:id", verifyAdmin, updateRoom);
-roomRouter.delete("/:id", verifyAdmin, deleteRoom);
+roomRouter.delete("/:id/:hotelId", verifyAdmin, deleteRoom);
 roomRouter.get("/:id", getRoom);
 roomRouter.get("/", getRooms);
 
