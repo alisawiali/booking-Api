@@ -5,7 +5,6 @@ const Hotelsschema = new Schema({
     type: String,
     required: true,
   },
-  // يكتب
   type: {
     type: String,
     required: true,

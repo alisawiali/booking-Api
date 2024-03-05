@@ -9,24 +9,24 @@ import {
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 
 const userRouter = Router();
-userRouter.get("/chackAuthentication", verifyToken, (req, res, next) => {
-  res.send("hallo user, You are loggend in now");
-});
+// userRouter.get("/chackAuthentication", verifyToken, (req, res, next) => {
+//   res.send("hallo user, You are loggend in now");
+// });
 
-userRouter.get("/checkuser/:id", verifyUser, (req, res, next) => {
-  res.send("hallo user, You are loggend in and now cann delete your account");
-});
+// userRouter.get("/checkuser/:id", verifyUser, (req, res, next) => {
+//   res.send("hallo user, You are loggend in and now cann delete your account");
+// });
 
-userRouter.get("/checkAdmin/:id", verifyAdmin, (req, res, next) => {
-  res.send("hallo Admin, You are logged now und you can delete all accounts");
-});
+// userRouter.get("/checkAdmin/:id", verifyAdmin, (req, res, next) => {
+//   res.send("hallo Admin, You are logged now und you can delete all accounts");
+// });
 
 // UPDATE USER
-userRouter.put("/", updateUser);
+userRouter.put("/", verifyUser, updateUser);
 // DELETE
-userRouter.delete("/:id", deletedUser);
+userRouter.delete("/:id", verifyUser, deletedUser);
 //  GET BY ID
-userRouter.get("/:id", getByIdUser);
+userRouter.get("/:id", verifyUser, getByIdUser);
 //  GET USERS
-userRouter.get("/", getUsers);
+userRouter.get("/", verifyAdmin, getUsers);
 export default userRouter;

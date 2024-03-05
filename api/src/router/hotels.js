@@ -7,14 +7,15 @@ import {
   getdHotels,
   puteHotel,
 } from "../controller/hotels.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 const hotelsRouter = Router();
 // CAEATE  HOTEL
-hotelsRouter.post("/", createHotel);
+hotelsRouter.post("/", verifyAdmin, createHotel);
 // UPDATE  HOTEEL
-hotelsRouter.put("/:id", puteHotel);
+hotelsRouter.put("/:id", verifyAdmin, puteHotel);
 // DELETE HOTEEL
-hotelsRouter.delete("/:id", deletedHotel);
+hotelsRouter.delete("/:id", verifyAdmin, deletedHotel);
 //  GET BY ID HOTEL
 hotelsRouter.get("/:id", getByIddHotel);
 

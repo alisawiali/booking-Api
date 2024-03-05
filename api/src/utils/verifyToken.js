@@ -17,7 +17,7 @@ export const verifyToken = (req, res, next) => {
 
 // Middleware zur Überprüfung des Benutzers
 export const verifyUser = (req, res, next) => {
-  verifyToken(req, res, () => {
+  verifyToken(req, res, next, () => {
     const userId = req.params.id;
     const userFromToken = req.user;
     if (userFromToken.id === userId || userFromToken.isAdmin) {
@@ -30,15 +30,13 @@ export const verifyUser = (req, res, next) => {
 
 // Middleware zur Überprüfung des Administrators
 export const verifyAdmin = (req, res, next) => {
-  verifyToken(req, res, () => {
-      const userFromToken = req.user;
-      console.log(userFromToken);
-      console.log(userFromToken.isAdmin);
-      // Überprüfen, ob der Benutzer im Token ein Administrator ist
-      if (userFromToken.isAdmin) {
-        next();
-      } else {
-        return next(createErrro(403, "You are not authorized Imad!"));
-      }
+  verifyToken(req, res, next, () => {
+    const userFromToken = req.user;
+    // Überprüfen, ob der Benutzer im Token ein Administrator ist
+    if (userFromToken.isAdmin) {
+      next();
+    } else {
+      return next(createErrro(403, "You are not authorized!"));
+    }
   });
 };
