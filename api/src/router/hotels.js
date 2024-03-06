@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { createErrro } from "../utils/error.js";
 import {
+  countByCity,
+  countByType,
   createHotel,
   deletedHotel,
   getByIddHotel,
@@ -17,11 +19,12 @@ hotelsRouter.put("/:id", verifyAdmin, puteHotel);
 // DELETE HOTEEL
 hotelsRouter.delete("/:id", verifyAdmin, deletedHotel);
 //  GET BY ID HOTEL
-hotelsRouter.get("/:id", getByIddHotel);
+hotelsRouter.get("/find/:id", getByIddHotel);
 
 // GET All HOTLES
 hotelsRouter.get("/", getdHotels);
-
+hotelsRouter.get("/countByCity", countByCity);
+hotelsRouter.get("/countByType", countByType);
 
 
 export default hotelsRouter;

@@ -1,17 +1,18 @@
 import Hotels from "../modals/Hotels.js";
-// CAEATE POST
+
+
+// CAEATE POST HOTEL
 export const createHotel = async (req, res, next) => {
   const hotel = new Hotels(req.body);
   try {
     const savedHotel = await hotel.save();
     return res.status(200).json(savedHotel);
-    // if (!savedHotel) return res.status(400).send("Failed to create Hotel");
   } catch (error) {
     next(error);
   } 
 };
 
-// UPDATE
+// UPDATE HOTEL
 export const puteHotel = async (req, res, next) => {
   try {
     const updateHotel = await Hotels.findByIdAndUpdate(
@@ -24,7 +25,7 @@ export const puteHotel = async (req, res, next) => {
     next(error);
   }
 };
-// DELETE
+// DELETE HOTEL
 export const deletedHotel = async (req, res) => {
   try {
     await Hotels.findByIdAndDelete(req.params.id);
@@ -33,7 +34,7 @@ export const deletedHotel = async (req, res) => {
     res.status(400).send("Error deleting the hotel.", error);
   }
 };
-//  GET BY ID
+//  GET BY ID HOTEL
 export const getByIddHotel = async (req, res, next) => {
   try {
     const findHotels = await Hotels.findById(req.params.id);
@@ -43,11 +44,43 @@ export const getByIddHotel = async (req, res, next) => {
   }
 };
 
-// GET All
+// GET All HOTEL
 export const getdHotels = async (req, res, next) => {
   try {
     const findHotels = await Hotels.find();
     res.status(200).send(findHotels);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// GET countByCity
+export const countByCity = async (req, res, next) => {
+  const cities = req.query.cities.split(",")
+  try {
+    const list = await Promise.all(cities.map(city => {
+        return Hotels.countDocuments({city:city})
+    }))
+
+    res.status(200).send(list);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
+// GET countByType
+export const countByType = async (req, res, next) => {
+  const cities = req.query.cities.split(",");
+  try {
+    const list = await Promise.all(
+      cities.map((city) => {
+        return Hotels.countDocuments({ city: city });
+      })
+    );
+
+    res.status(200).send(list);
   } catch (error) {
     next(error);
   }
