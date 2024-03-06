@@ -2,6 +2,7 @@
 import dotenv from "dotenv";
 // Importiere das Express-Framework
 import express from "express";
+import cors from "cors";
 // Importiere die Verbindung zur Datenbank aus der db.js-Datei
 import { connectDb } from "./service/db.js";
 // Importiere Router für verschiedene Endpunkte
@@ -23,7 +24,14 @@ app.use(express.json());
 
 // Konfiguriere Umgebungsvariablen mit dotenv
 dotenv.config();
-
+const corsOptions = {
+  origin: process.env.FRONTEND_PORT,
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
 // Verbinde mit der Datenbank
 await connectDb();
 
