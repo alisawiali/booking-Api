@@ -46,8 +46,13 @@ export const getByIddHotel = async (req, res, next) => {
 
 // GET All HOTEL
 export const getdHotels = async (req, res, next) => {
+  //  wird nach der Price von min -maximum sortiert
+  const { min, max, ...others } = req.body;
   try {
-    const findHotels = await Hotels.find();
+    const findHotels = await Hotels.find({
+      ...others,
+      cheapstprice: { $gt: min | 1, $lt: max || 999 },
+    }).limit(req.query.limit);
     res.status(200).send(findHotels);
   } catch (error) {
     next(error);
