@@ -3,7 +3,9 @@ import "./featuredProperties.css";
 
 const FeaturedProperties = () => {
   const images = [];
-   const { data, loading, error } = useFetch("/hotels/feautred=true&limit=4");
+  //  ja nachdem limit abruf das images wird angezeigt.
+
+  const { data, loading, error } = useFetch("/hotels?feautred=true&limit=4");
 
   return (
     <div className="fp">
@@ -13,11 +15,11 @@ const FeaturedProperties = () => {
         <>
           {data.map((item, i) => (
             <div className="fpItem" key={i._id}>
-              <img src={item.photos[0]} alt="" className="fpImg" />
+              <img src="" alt="" className="fpImg" />
               <span className="fpName">{item.name}</span>
               <span className="fpCity">{item.city}</span>
               <span className="fpPrice">
-                Starting from ${item.cheapstprice}/night
+                Starting from ${item.cheapstprice}
               </span>
               {item.rating && (
                 <div className="fpRating">
