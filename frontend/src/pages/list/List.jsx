@@ -25,6 +25,7 @@ const List = () => {
   const handelClickBtn = () => {
     reFetch();
   };
+
   return (
     <div>
       <Navbar />
