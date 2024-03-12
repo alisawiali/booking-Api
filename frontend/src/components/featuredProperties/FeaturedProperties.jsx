@@ -5,7 +5,7 @@ const FeaturedProperties = () => {
   const images = [];
   //  ja nachdem limit abruf das images wird angezeigt.
 
-  const { data, loading, error } = useFetch("/hotels?feautred=true&limit=4");
+  const { data, loading, error } = useFetch("/hotels?feautred=true&limit=5");
 
   return (
     <div className="fp">

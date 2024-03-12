@@ -20,7 +20,6 @@ const List = () => {
   const { data, loading, error, reFetch } = useFetch(
     `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
   );
-
   //
 
   const handelClickBtn = () => {
@@ -111,8 +110,8 @@ const List = () => {
               "loading"
             ) : (
               <>
-                {data.map((item, i) => (
-                  <SearchItem item={item} key={item._id || i} />
+                {data.map((item) => (
+                  <SearchItem item={item} key={item._id} />
                 ))}
               </>
             )}
