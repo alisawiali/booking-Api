@@ -30,7 +30,7 @@ const Hotel = () => {
 
   //  hier wird searchConttext
   const { dates, options } = useContext(serachContext);
-  console.log(dates);
+
   function calculateDateDifference(date1, date2) {
     const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
@@ -38,7 +38,6 @@ const Hotel = () => {
     return diffDays;
   }
   const days = calculateDateDifference(dates[0].endDate, dates[0].startDate);
-  console.log(days);
 
   const handleOpen = (i) => {
     setSlideNumber(i);
