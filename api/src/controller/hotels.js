@@ -1,5 +1,5 @@
 import Hotels from "../modals/Hotels.js";
-
+import Room from "../modals/Room.js";
 
 // CAEATE POST HOTEL
 export const createHotel = async (req, res, next) => {
@@ -9,7 +9,7 @@ export const createHotel = async (req, res, next) => {
     return res.status(200).json(savedHotel);
   } catch (error) {
     next(error);
-  } 
+  }
 };
 
 // UPDATE HOTEL
@@ -79,7 +79,6 @@ export const countByCity = async (req, res, next) => {
 
 // GET countByType
 export const countByType = async (req, res, next) => {
-
   try {
     const types = ["hotel", "aprtment", "resort", "villa", "cobin"];
     const counts = await Promise.all(
@@ -94,4 +93,17 @@ export const countByType = async (req, res, next) => {
   }
 };
 
-
+//
+export const getHotelRooms = async (req, res, next) => {
+  try {
+    const hotel = await Hotels.findById(req.params.id);
+    const list = await Promise.all(
+      hotel.rooms.map((room) => {
+        return Room.findById(room);
+      })
+    );
+    res.status(200).json(list);
+  } catch (error) {
+    next(error);
+  }
+};

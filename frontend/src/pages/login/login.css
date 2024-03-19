@@ -1,0 +1,35 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #eee;
+}
+
+.login .LContainer {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 2rem;
+    background-color: #d1d0d0;
+    border-radius: .2rem;
+}
+
+.login .LContainer input {
+    margin: 1rem 0;
+    padding: 1rem;
+    outline: none;
+    border: none;
+    border-radius: .3rem;
+}
+
+.login .LContainer .LBtn {
+    background-color: #0000ff;
+    padding: 0.4rem;
+    color: #ffff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: .5rem;
+}

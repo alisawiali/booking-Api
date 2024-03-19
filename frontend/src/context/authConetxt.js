@@ -16,12 +16,14 @@ const AuthReducer = (state, action) => {
         loading: true,
         error: null,
       };
+    //   النجاح في تسجيل الدخول
     case "LOGIN_SUCCESS":
       return {
         user: action.payload,
         loading: false,
         error: null,
       };
+    //   فشل تسجيل الدخول
     case "LOGIN_FAILURE":
       return {
         user: null,
@@ -41,6 +43,7 @@ const AuthReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITAL_CONTEXT);
+  console.log("Initial Context:", state);
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(state.user));
   }, [state.user]);
@@ -57,3 +60,4 @@ export const AuthContextProvider = ({ children }) => {
     </authContext.Provider>
   );
 };
+

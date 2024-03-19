@@ -15,10 +15,12 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { serachContext } from "../../context/serachContext";
+import { authContext } from "../../context/authConetxt";
 
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
+  const { user } = useContext(authContext);
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -46,7 +48,6 @@ const Header = ({ type }) => {
 
   //  hier wird searchConttext
   const { dispatch } = useContext(serachContext);
-
 
   const handleSearch = () => {
     dispatch({ type: "NEW_SERACH", payload: { destination, dates, options } });
@@ -91,7 +92,7 @@ const Header = ({ type }) => {
               Get rewarded for your travels – unlock instant savings of 10% or
               more with a free Lamabooking account
             </p>
-            <button className="headerBtn">Sign in / Register</button>
+            {!user && <button className="headerBtn">Sign in / Register</button>}
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
