@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../hooks/useFetch";
 import { serachContext } from "../../context/serachContext";
+import axios from "axios";
 
 // Reserve
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedtRooms] = useState([]);
-  const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
+  const { data } = useFetch(`/hotels/room/${hotelId}`);
   const { dates } = useContext(serachContext);
 
   const getDatesInRange = (startDates, endDates) => {
@@ -44,9 +45,20 @@ const Reserve = ({ setOpen, hotelId }) => {
         : selectedRooms.filter((item) => item !== value)
     );
   };
-  console.log(selectedRooms);
 
-  const handelBtnClick = () => {};
+  const handelBtnClick = async () => {
+    try {
+      await Promise.all(
+        selectedRooms.map((roomId) => {
+          const res = axios.put(`/rooms/availability/${roomId}`, {
+            dates: allDates,
+          });
+          return res.data;
+        })
+      );
+    } catch (error) {}
+  };
+
   return (
     <div className="reserve">
       <div className="reContainer">
@@ -55,9 +67,10 @@ const Reserve = ({ setOpen, hotelId }) => {
           className="rClose"
           onClick={() => setOpen(false)}
         />
-        <span>Select your rooms:</span>
-        {data.map((item) => (
-          <div key={item.id} className="rItem">
+        <span>Select your rooms: </span>
+
+        {data.map((item, id) => (
+          <div key={id} className="rItem">
             <div className="rItemInfo">
               <div className="rTitle">{item.title}</div>
               <div className="rDesc">{item.desc}</div>
@@ -67,8 +80,8 @@ const Reserve = ({ setOpen, hotelId }) => {
               <div className="rPrice">{item.price}</div>
             </div>
             <div className="rselectRooms">
-              {item.roomNumbers.map((roomNumber) => (
-                <div className="room">
+              {item.roomNumbers.map((roomNumber, id) => (
+                <div className="room" key={id}>
                   <label>{roomNumber.number}</label>
                   <input
                     type="checkbox"
