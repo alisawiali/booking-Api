@@ -13,29 +13,6 @@ The Hotel Booking System allows users to:
 
 ## Folder Structure
 
-Hotel-Booking-System
-├── api
-│   ├── service
-│   │   └── index.js
-│   ├── src
-│   │   └── ...
-│   ├── .env
-│   ├── .gitignore
-│   ├── index.js
-│   ├── package-lock.json
-│   └── package.json
-└── frontend
-    ├── public
-    │   └── ...
-    ├── src
-    │   └── ...
-    ├── .gitignore
-    ├── README.md
-    ├── package-lock.json
-    └── package.json
-
-
-
 - **api**: Contains the backend code for the Hotel Booking System.
   - **service**: Directory for service-related files.
   - **src**: Source files for backend functionality.
